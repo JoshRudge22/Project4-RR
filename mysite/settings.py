@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-qz=5q4q=)c+*f5yevu3#j7rs9sg@b=s+869tzfmr9fxg%)h(t8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['8000-joshrudge22-project4rr-pdlnn8zcws8.ws-eu110.gitpod.io','.herokuapp.com']
+ALLOWED_HOSTS = ['8000-joshrudge22-project4rr-pdlnn8zcws8.ws-eu110.gitpod.io','rudge-project4-62b3e629a62b.herokuapp.com']
 
 
 # Application definition
@@ -89,6 +89,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://8000-joshrudge22-project4rr-pdlnn8zcws8.ws-eu110.gitpod.io",
+    "https://*.herokuapp.com"
+]
 
 
 # Password validation
