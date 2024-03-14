@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your Website{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Additional CSS or external stylesheets can be included here -->
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <!-- Additional navigation links can be added here -->
+        </ul>
+    </nav>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    <p>&copy; {% now "Y" %} Your Company</p>
+</footer>
+
+<!-- Additional scripts or JavaScript files can be included here -->
+{% block extra_scripts %}{% endblock %}
+
+</body>
+</html>
