@@ -1,0 +1,52 @@
+
+
+{% load static %}
+
+{% block content %}
+    <h1 class="title">The Job Board</h1>
+        {% for job in jobs %}
+            <div class="listing">
+                <h2 class="job-title">{{ job.job_title }}</h2>
+                <br><br>
+                <h3 class="details">Benefits:</h3>
+                <p class="detail-text">{{ job.job_benefits }}</p>
+                <hr>
+                <h3 class="details">Address:</h3>
+                <p class="detail-text">{{ job.address }}</p>
+                <hr>
+                <h3 class="details">Job Description:</h3>
+                <p class="detail-text">{{ job.job_details }}</p>
+                <hr>
+                <h3 class="details">Job Requirements:</h3>
+                <p class="detail-text">{{ job.job_requirements }}</p>
+                <hr>
+                {% if job.hired %}
+                    <p class="status-filled">Status: No Longer Hiring</p>
+                {% else %}
+                    <p class="status-hiring">Status: Hiring</p>
+                    {% if job.available_times.all %}
+                    <h3 class="details">Interview Date:</h3>
+                    <p class="detail-text">{{ job.interview_date }}</p>                    
+                    <h3 class="details">Available times:</p>
+                    {% for available_time in job.available_times.all %}
+                    <p class="detail-text">{{ available_time.time }}</p>
+                    {% endfor %}
+                    {% endif %} 
+                    <button class="job_button"><a href="#">More info</a></button>
+                {% endif %}
+            </div>
+        {% endfor %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if jobs.has_previous %}
+                <button class="job_button"><a href="?page={{ jobs.previous_page_number }}">previous</a></button>
+            {% endif %}
+            <span class="current">
+                Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}.
+            </span>
+            {% if jobs.has_next %}
+                <button class="job_button"><a href="?page={{ jobs.next_page_number }}">next</a></button>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

@@ -1,3 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from .models import Job
 
-# Create your views here.
+def job_list(request):
+    jobs = Job.objects.all()
+    items_per_page = 6
+    paginator = Paginator(jobs, items_per_page)
+    page = request.GET.get('page')
+    try:
+        jobs = paginator.page(page)
+    except PageNotAnInteger:
+        jobs = paginator.page(1)
+    except EmptyPage:
+        jobs = paginator.page(paginator.num_pages)
+    return render(request, 'jobs.html', {'jobs': jobs})
