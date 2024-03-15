@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect  
+from django.contrib import messages
 from .forms import ApplyingForm, HiringForm, ContactForm
+from .models import ContactUsForm, Hiring
 
 def home(request):
     return render(request, 'index.html')
@@ -11,39 +13,21 @@ def hiring_form(request):
     if request.method == 'POST':
         form = HiringForm(request.POST)
         if form.is_valid():
-            form.save()
-            subject = 'New Job Application'
-            message = f'Name: {form.cleaned_data["name"]}\nEmail: {form.cleaned_data["email"]}\n...'
-            from_email = 'joshrudge@hotmail.com'
-            to_email = ['rudgejosh@hotmail.com']
-            send_mail(subject, message, from_email, to_email)
+            company_name = form.cleaned_data['company_name']
+            email = form.cleaned_data['email']
+            phone_number = form.cleaned_data['phone_number']
+            job_description = form.cleaned_data['job_description']
+            contact_form_data = Hiring.objects.create(
+                company_name=company_name,
+                email=email,
+                phone_number=phone_number,
+                job_description=job_description,
+            )
             return redirect('home')
     else:
         form = HiringForm()
 
     return render(request, 'hiring.html', {'form': form})
-
-def contact_view(request):
-    if request.method == 'POST':
-        form = ContactUsForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            phone_number = form.cleaned_data['phone_number']
-            message = form.cleaned_data['message']
-            subject = f"Contact Form Submission from {name}"
-            message_body = f"Name: {name}\nEmail: {email}\nPhone Number: {phone_number}\n\nMessage:\n{message}"
-            send_mail(
-                subject,
-                message_body,
-                'rudgejosh@hotmail.com',
-                ['joshrudge@hotmail.com'], 
-                fail_silently=False,
-            )
-            return HttpResponseRedirect(reverse('home'))
-    else:
-        form = ContactUsForm()
-    return render(request, 'contact.html', {'form': form})
 
 def contact_view(request):
     if request.method == 'POST':
@@ -53,16 +37,20 @@ def contact_view(request):
             email = form.cleaned_data['email']
             phone_number = form.cleaned_data['phone_number']
             message = form.cleaned_data['message']
-            subject = f"Contact Form Submission from {name}"
-            message_body = f"Name: {name}\nEmail: {email}\nPhone Number: {phone_number}\n\nMessage:\n{message}"
-            send_mail(
-                subject,
-                message_body,
-                'rudgejosh@hotmail.com',
-                ['joshrudge@hotmail.com'], 
-                fail_silently=False,
+            best_time_to_contact = form.cleaned_data['best_time_to_contact']
+            contact_form_data = ContactUsForm.objects.create(
+                name=name,
+                email=email,
+                phone_number=phone_number,
+                message=message,
+                best_time_to_contact=best_time_to_contact
             )
-            return HttpResponseRedirect(reverse('home'))
+            
+            messages.success(request, 'Your form was submitted successfully!')
+            
+            return redirect('home')
     else:
         form = ContactForm()
+
     return render(request, 'contact.html', {'form': form})
+
