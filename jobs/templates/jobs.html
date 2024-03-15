@@ -1,52 +1,58 @@
-
+{% extends "base.html" %}
 
 {% load static %}
 
 {% block content %}
-    <h1 class="title">The Job Board</h1>
-        {% for job in jobs %}
-            <div class="listing">
-                <h2 class="job-title">{{ job.job_title }}</h2>
-                <br><br>
-                <h3 class="details">Benefits:</h3>
-                <p class="detail-text">{{ job.job_benefits }}</p>
-                <hr>
-                <h3 class="details">Address:</h3>
-                <p class="detail-text">{{ job.address }}</p>
-                <hr>
-                <h3 class="details">Job Description:</h3>
-                <p class="detail-text">{{ job.job_details }}</p>
-                <hr>
-                <h3 class="details">Job Requirements:</h3>
-                <p class="detail-text">{{ job.job_requirements }}</p>
-                <hr>
-                {% if job.hired %}
-                    <p class="status-filled">Status: No Longer Hiring</p>
-                {% else %}
-                    <p class="status-hiring">Status: Hiring</p>
-                    {% if job.available_times.all %}
-                    <h3 class="details">Interview Date:</h3>
-                    <p class="detail-text">{{ job.interview_date }}</p>                    
-                    <h3 class="details">Available times:</p>
-                    {% for available_time in job.available_times.all %}
-                    <p class="detail-text">{{ available_time.time }}</p>
-                    {% endfor %}
-                    {% endif %} 
-                    <button class="job_button"><a href="#">More info</a></button>
-                {% endif %}
-            </div>
+<div class="container">
+    <h1 class="title text-center mb-4">The Job Board</h1>
+    
+    {% for job in jobs %}
+    <div class="card mb-4">
+      <div class="card-body">
+        <h2 class="card-title">{{ job.job_title }}</h2>
+        <hr>
+        <h3 class="card-subtitle mb-3">Benefits:</h3>
+        <p class="card-text">{{ job.job_benefits }}</p>
+        <hr>
+        <h3 class="card-subtitle mb-3">Address:</h3>
+        <p class="card-text">{{ job.address }}</p>
+        <hr>
+        <h3 class="card-subtitle mb-3">Job Description:</h3>
+        <p class="card-text">{{ job.job_details }}</p>
+        <hr>
+        <h3 class="card-subtitle mb-3">Job Requirements:</h3>
+        <p class="card-text">{{ job.job_requirements }}</p>
+        <hr>
+        {% if job.hired %}
+        <p class="text-danger">Status: No Longer Hiring</p>
+        {% else %}
+        <p class="text-success">Status: Hiring</p>
+        {% if job.available_times.all %}
+        <h3 class="card-subtitle mb-3">Interview Date:</h3>
+        <p class="card-text">{{ job.interview_date }}</p>                    
+        <h3 class="card-subtitle mb-3">Available times:</h3>
+        {% for available_time in job.available_times.all %}
+        <p class="card-text">{{ available_time.time }}</p>
         {% endfor %}
-    <div class="pagination">
-        <span class="step-links">
-            {% if jobs.has_previous %}
-                <button class="job_button"><a href="?page={{ jobs.previous_page_number }}">previous</a></button>
-            {% endif %}
-            <span class="current">
-                Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}.
-            </span>
-            {% if jobs.has_next %}
-                <button class="job_button"><a href="?page={{ jobs.next_page_number }}">next</a></button>
-            {% endif %}
-        </span>
+        {% endif %} 
+        <button class="btn btn-primary">More info</button>
+        {% endif %}
+      </div>
     </div>
+    {% endfor %}
+    
+    <div class="pagination justify-content-center">
+      <span class="step-links">
+        {% if jobs.has_previous %}
+        <a href="?page={{ jobs.previous_page_number }}" class="btn btn-secondary mr-2">Previous</a>
+        {% endif %}
+        <span class="current">
+          Page {{ jobs.number }} of {{ jobs.paginator.num_pages }}.
+        </span>
+        {% if jobs.has_next %}
+        <a href="?page={{ jobs.next_page_number }}" class="btn btn-secondary ml-2">Next</a>
+        {% endif %}
+      </span>
+    </div>
+  </div>
 {% endblock %}

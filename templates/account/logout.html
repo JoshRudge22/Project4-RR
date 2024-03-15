@@ -5,6 +5,7 @@
 {% block head_title %}{% trans "Sign Out" %}{% endblock head_title %}
 
 {% block content %}
+
 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -19,7 +20,7 @@
           </div>
           <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+              <a href="{% url 'account_logout' %}" class="btn btn-danger">Logout</a>
           </div>
       </div>
   </div>

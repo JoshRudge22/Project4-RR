@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Job
 
-def job_list(request):
+def jobs(request):
     jobs = Job.objects.all()
     items_per_page = 6
     paginator = Paginator(jobs, items_per_page)
