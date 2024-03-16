@@ -37,4 +37,3 @@ class Profile(models.Model):
     cv = models.FileField(upload_to='cv/', blank=True)
 
 
-

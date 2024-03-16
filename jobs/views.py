@@ -18,6 +18,27 @@ def jobs(request):
         jobs = paginator.page(paginator.num_pages)
     return render(request, 'jobs.html', {'jobs': jobs})
 
+def applying(request, job_id):
+    job = Job.objects.get(id=job_id)
+    if request.method == 'POST':
+        form = JobApplicationForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = request.user
+            email = form.cleaned_data['email']
+            phone_number = form.cleaned_data['phone_number']
+            cv = form.cleaned_data['cv']
+            job_application = JobApplication.objects.create(
+                user=user,
+                job=job,
+                email=email,
+                phone_number=phone_number,
+                cv=cv
+            )
+            return redirect('home')
+    else:
+        form = JobApplicationForm()
+    return render(request, 'applying.html', {'form': form, 'job': job})
+
 @login_required
 def profile(request):
     profile = get_object_or_404(Profile, user=request.user)

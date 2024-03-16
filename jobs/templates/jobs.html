@@ -35,7 +35,7 @@
         <p class="card-text">{{ available_time.time }}</p>
         {% endfor %}
         {% endif %} 
-        <button class="btn btn-primary">Apply Here</button>
+        <button class="btn btn-success"><a href="{% url 'applying' job_id=job.id %}" class="text-white text-decoration-none">Apply for {{ job.title }}</a></button>
         {% endif %}
       </div>
     </div>

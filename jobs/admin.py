@@ -13,3 +13,4 @@ class JobAdmin(admin.ModelAdmin):
 @admin.register(AvailableTime)
 class AvailableTimeAdmin(admin.ModelAdmin):
     list_display = ('time',)
+

@@ -2,4 +2,44 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card mt-5">
+        <div class="card-body">
+          <h1 class="card-title">Apply for Job</h1>
+          <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input type="text" class="form-control" id="username" value="{{ user.username }}" readonly>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" value="{{ user.email }}" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="phone_number" class="form-label">Phone Number</label>
+                <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{ user.phone_number }}" readonly>
+              </div>
+            <div class="mb-3">
+                <label for="cv" class="form-label">CV</label>
+                <input type="file" class="form-control" id="cv" name="cv" accept=".pdf,.doc,.docx" value="#" readonly>
+              </div>
+            <div class="mb-3">
+              <label for="cover_letter" class="form-label">Cover Letter</label>
+              <textarea class="form-control" id="cover_letter" name="cover_letter" rows="5"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Application</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<p>Please sign in to apply for this job.</p>
+{% endif %}
+
 {% endblock %}
