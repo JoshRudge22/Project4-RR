@@ -7,5 +7,6 @@ urlpatterns = [
     path('advertising/', advertising, name='advertising'),
     path('contact/', contact_view, name='contact'),
     path('hiring/', hiring_form, name='hiring'),
+    #path('applying/', applying, name='applying'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]

@@ -27,6 +27,7 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'advertising' %}">Advertising</a></li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact Us</a></li>
                 {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'profile' %}">My Account</a>
                 <li class="nav-item"><a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page" href="{% url 'account_logout' %}">Logout</a>
                 </li>
                 {% else %}

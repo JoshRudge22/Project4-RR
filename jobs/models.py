@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Job(models.Model):
     job_title = models.CharField(max_length=100)
@@ -26,3 +29,12 @@ class AvailableTime(models.Model):
 
     def __str__(self):
         return self.time
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email = models.EmailField(blank=True)
+    phone_number = models.CharField(max_length=15, blank=True)
+    cv = models.FileField(upload_to='cv/', blank=True)
+
+
+
