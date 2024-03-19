@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from .models import Job, Profile
-from .forms import ProfileForm
+from .models import Job, Profile, JobApplication
+from .forms import ProfileForm, JobApplicationForm
 
 
 def jobs(request):
@@ -18,23 +18,17 @@ def jobs(request):
         jobs = paginator.page(paginator.num_pages)
     return render(request, 'jobs.html', {'jobs': jobs})
 
+@login_required
 def applying(request, job_id):
-    job = Job.objects.get(id=job_id)
+    job = get_object_or_404(Job, pk=job_id)
     if request.method == 'POST':
         form = JobApplicationForm(request.POST, request.FILES)
         if form.is_valid():
-            user = request.user
-            email = form.cleaned_data['email']
-            phone_number = form.cleaned_data['phone_number']
-            cv = form.cleaned_data['cv']
-            job_application = JobApplication.objects.create(
-                user=user,
-                job=job,
-                email=email,
-                phone_number=phone_number,
-                cv=cv
-            )
-            return redirect('home')
+            job_application = form.save(commit=False)
+            job_application.user = request.user
+            job_application.job = job 
+            job_application.save()
+            return redirect('success')  
     else:
         form = JobApplicationForm()
     return render(request, 'applying.html', {'form': form, 'job': job})

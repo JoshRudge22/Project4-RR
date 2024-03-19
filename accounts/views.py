@@ -11,17 +11,19 @@ def advertising(request):
 
 def hiring_form(request):
     if request.method == 'POST':
-        form = HiringForm(request.POST)
+        form = HiringForm(request.POST, request.FILES)
         if form.is_valid():
             company_name = form.cleaned_data['company_name']
             email = form.cleaned_data['email']
             phone_number = form.cleaned_data['phone_number']
             job_description = form.cleaned_data['job_description']
+            job_doc = form.cleaned_data['job_doc']
             contact_form_data = Hiring.objects.create(
                 company_name=company_name,
                 email=email,
                 phone_number=phone_number,
                 job_description=job_description,
+                job_doc=job_doc,
             )
             return redirect('home')
     else:

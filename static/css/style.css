@@ -1,10 +1,21 @@
-footer {
-    background-color: #333; /* Footer background color */
-    color: #fff; /* Text color */
-    padding: 20px 0; /* Padding at the top and bottom */
-    text-align: center; /* Center-align text */
+body {
+    background-color: #f8f9fa;
+}
+.navbar {
+    background-color: #343a40;
+}
+.nav-link {
+    color: #fff !important;
+}
+.nav-link:hover {
+    color: #adb5bd !important;
 }
 
-footer p {
-    margin: 0; /* Remove default margins */
+.card-text {
+    list-style-type: disc;
+}
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 20px 0;
 }

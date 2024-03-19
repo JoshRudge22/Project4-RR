@@ -36,4 +36,5 @@ class Profile(models.Model):
     phone_number = models.CharField(max_length=15, blank=True)
     cv = models.FileField(upload_to='cv/', blank=True)
 
-
+class JobApplication(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

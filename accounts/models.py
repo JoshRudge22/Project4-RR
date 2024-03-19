@@ -12,6 +12,7 @@ class Hiring(models.Model):
     email = models.EmailField()
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     job_description = models.TextField(blank=True, null=True)
+    job_doc = models.FileField(upload_to='cv/', null=True, blank=True)
 
 class ContactUsForm(models.Model):
     name = models.CharField(max_length=100)

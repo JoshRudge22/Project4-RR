@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Job, AvailableTime
+from .models import Job, AvailableTime, JobApplication
 
 @admin.register(Job)
 class JobAdmin(admin.ModelAdmin):
@@ -13,4 +13,6 @@ class JobAdmin(admin.ModelAdmin):
 @admin.register(AvailableTime)
 class AvailableTimeAdmin(admin.ModelAdmin):
     list_display = ('time',)
+
+admin.site.register(JobApplication)
 
