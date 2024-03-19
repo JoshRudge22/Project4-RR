@@ -10,9 +10,8 @@ class JobAdmin(admin.ModelAdmin):
         hired.short_description = 'Filled'
         hired.boolean = True
 
-@admin.register(AvailableTime)
-class AvailableTimeAdmin(admin.ModelAdmin):
-    list_display = ('time',)
+admin.register(AvailableTime)
+
 
 admin.site.register(JobApplication)
 

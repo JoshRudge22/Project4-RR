@@ -28,7 +28,7 @@ def applying(request, job_id):
             job_application.user = request.user
             job_application.job = job 
             job_application.save()
-            return redirect('success')  
+            return redirect('submitted.html')  
     else:
         form = JobApplicationForm()
     return render(request, 'applying.html', {'form': form, 'job': job})
@@ -45,3 +45,4 @@ def profile(request):
         form = ProfileForm(instance=profile)
     
     return render(request, 'profile.html', {'profile': profile, 'form': form})
+

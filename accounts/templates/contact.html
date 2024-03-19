@@ -1,18 +1,35 @@
 {% extends "base.html" %}
 
-{% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
-<div class="container">
-  <h1 class="title mb-4">Contact Me</h1>
-  <div class="row justify-content-center">
-    <form method="post" class="hiring-form">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <div class="d-grid mt-3">
-        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+<div class="container mt-5">
+    <h1 class="title mb-4">Contact Form</h1>
+    <p class="title">For us to contact you please fill out this form</p>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post" enctype="multipart/form-data" class="form">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="inputName" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="inputName" name="company_name" placeholder="Enter your name">
+                </div>
+                <div class="mb-3">
+                    <label for="inputEmail" class="form-label">Email Address</label>
+                    <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter your email">
+                </div>
+                <div class="mb-3">
+                    <label for="inputPhone_number" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="inputPhone_number" name="phone_number" placeholder="Enter your number">
+                </div>
+                <div class="mb-3">
+                    <label for="inputMessage" class="form-label">Message</label>
+                    <textarea class="form-control" id="inputMessage" name="Message" rows="4" placeholder="Enter your question"></textarea>
+                </div>
+                <button type="submit" class="submit btn-primary">Submit</button>
+                <button type="submit" class="submit btn-primary">Contact us</button>
+            </form>
         </div>
-    </form>
-  </div>
+    </div>
 </div>
 {% endblock %}

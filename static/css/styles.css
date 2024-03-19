@@ -8,6 +8,7 @@ footer {
     background-color: #343a40; 
     color: #fff; 
     padding: 20px 0; 
+    margin-top: 30px;
     text-align: center; 
 }
 
@@ -74,7 +75,14 @@ h2, h3 {
     color: #28a745; 
 }
 
-/*-----applying.html-----*/
+/*-----for all forms-----*/
+
+.form {
+    background-color: #f8f9fa; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
 
 .card {
     border-radius: 10px;
@@ -87,7 +95,8 @@ h2, h3 {
 }
 
 .form-label {
-    font-weight: bold
+    font-weight: bold;
+    display: block;
 }
 
 .form-control {
@@ -97,6 +106,7 @@ h2, h3 {
 textarea.form-control {
     resize: none;
 }
+
 
 .btn-primary {
     width: 100%; 
@@ -111,13 +121,6 @@ textarea.form-control {
 
 /*----hiring.html-----*/
 
-.hiring-form {
-    background-color: #f8f9fa; 
-    padding: 20px; 
-    border-radius: 10px; 
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
 .submit {
     height: 40px;
     width: 120px;
@@ -125,5 +128,5 @@ textarea.form-control {
     margin-bottom: 20px;
 }
 
-/*----contact.html-----*/
+
 

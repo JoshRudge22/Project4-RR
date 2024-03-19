@@ -9,6 +9,9 @@ def home(request):
 def advertising(request):
     return render(request, 'advertising.html')
 
+def submitted(request):
+    return render(request, 'submitted.html')
+
 def hiring_form(request):
     if request.method == 'POST':
         form = HiringForm(request.POST, request.FILES)
@@ -25,7 +28,7 @@ def hiring_form(request):
                 job_description=job_description,
                 job_doc=job_doc,
             )
-            return redirect('home')
+            return redirect('submitted')
     else:
         form = HiringForm()
 
@@ -47,10 +50,7 @@ def contact_view(request):
                 message=message,
                 best_time_to_contact=best_time_to_contact
             )
-            
-            messages.success(request, 'Your form was submitted successfully!')
-            
-            return redirect('home')
+            return redirect('submitted')
     else:
         form = ContactForm()
 

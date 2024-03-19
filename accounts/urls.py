@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, contact_view, advertising, hiring_form
+from .views import home, contact_view, advertising, hiring_form, submitted
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -7,6 +7,6 @@ urlpatterns = [
     path('advertising/', advertising, name='advertising'),
     path('contact/', contact_view, name='contact'),
     path('hiring/', hiring_form, name='hiring'),
-    #path('applying/', applying, name='applying'),
+    path('submitted/', submitted, name='submitted'),
     path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]

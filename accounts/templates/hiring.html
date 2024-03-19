@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block content %}
 <div class="container mt-5">
     <h1 class="title mb-4">Advertise My Job</h1>
     <p class="title">Please fill out this form and to add your job to our site!</p>
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <form method="post" enctype="multipart/form-data" class="hiring-form">
+            <form method="post" enctype="multipart/form-data" class="form">
                 {% csrf_token %}
                 <div class="mb-3">
                     <label for="inputCompany_name" class="form-label">Company Name</label>
