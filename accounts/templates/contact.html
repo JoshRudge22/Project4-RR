@@ -4,21 +4,15 @@
 
 {% block content %}
 <div class="container">
+  <h1 class="title mb-4">Contact Me</h1>
   <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h2 class="card-title text-center mb-4">Contact Form</h2>
-          <form method="post" class="my-form">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <div class="d-grid mt-3">
-              <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-            </div>
-          </form>
+    <form method="post" class="hiring-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class="d-grid mt-3">
+        <button type="submit" class="btn btn-primary btn-lg">Submit</button>
         </div>
-      </div>
-    </div>
+    </form>
   </div>
 </div>
 {% endblock %}
